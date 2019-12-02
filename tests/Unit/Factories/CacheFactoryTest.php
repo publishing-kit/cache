@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Tests\Unit\Factories;
 
 use Tests\SimpleTestCase;
-use Statico\Core\Factories\CacheFactory;
+use PublishingKit\Cache\Factories\CacheFactory;
 use Stash\Exception\RuntimeException;
 use Mockery as m;
 

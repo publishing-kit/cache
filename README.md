@@ -9,7 +9,7 @@
 
 PublishingKit/Cache is a wrapper around `tedivm/stash` to make it more convenient to work with, as well as a factory class to instantiate the Stash instance.
 
-In theory it should also be easy to add support for other PSR6-compatible caches.
+In theory it should also be easy to add support for other PSR6-compatible caches - support for these is coming.
 
 ## Structure
 

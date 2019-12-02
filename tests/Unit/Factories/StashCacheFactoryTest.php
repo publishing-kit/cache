@@ -5,15 +5,15 @@ declare(strict_types=1);
 namespace Tests\Unit\Factories;
 
 use Tests\SimpleTestCase;
-use PublishingKit\Cache\Factories\CacheFactory;
+use PublishingKit\Cache\Factories\StashCacheFactory;
 use Stash\Exception\RuntimeException;
 use Mockery as m;
 
-final class CacheFactoryTest extends SimpleTestCase
+final class StashCacheFactoryTest extends SimpleTestCase
 {
     public function testDefault()
     {
-        $factory = new CacheFactory();
+        $factory = new StashCacheFactory();
         $config = m::mock('Zend\Config\Config');
         $config->shouldReceive('toArray')->once()->andReturn([]);
         $pool = $factory->make($config);
@@ -23,7 +23,7 @@ final class CacheFactoryTest extends SimpleTestCase
 
     public function testFilesystem()
     {
-        $factory = new CacheFactory();
+        $factory = new StashCacheFactory();
         $config = m::mock('Zend\Config\Config');
         $config->shouldReceive('toArray')->once()->andReturn([
             'driver' => 'filesystem',
@@ -38,7 +38,7 @@ final class CacheFactoryTest extends SimpleTestCase
 
     public function testBlackhole()
     {
-        $factory = new CacheFactory();
+        $factory = new StashCacheFactory();
         $config = m::mock('Zend\Config\Config');
         $config->shouldReceive('toArray')->once()->andReturn([
             'driver' => 'test'
@@ -50,7 +50,7 @@ final class CacheFactoryTest extends SimpleTestCase
 
     public function testEphemeral()
     {
-        $factory = new CacheFactory();
+        $factory = new StashCacheFactory();
         $config = m::mock('Zend\Config\Config');
         $config->shouldReceive('toArray')->once()->andReturn([
             'driver' => 'ephemeral'
@@ -62,7 +62,7 @@ final class CacheFactoryTest extends SimpleTestCase
 
     public function testComposite()
     {
-        $factory = new CacheFactory();
+        $factory = new StashCacheFactory();
         $config = m::mock('Zend\Config\Config');
         $config->shouldReceive('toArray')->once()->andReturn([
             'driver' => 'composite',
@@ -79,7 +79,7 @@ final class CacheFactoryTest extends SimpleTestCase
 
     public function testSqlite()
     {
-        $factory = new CacheFactory();
+        $factory = new StashCacheFactory();
         $config = m::mock('Zend\Config\Config');
         $config->shouldReceive('toArray')->once()->andReturn([
             'driver' => 'sqlite'
@@ -91,7 +91,7 @@ final class CacheFactoryTest extends SimpleTestCase
 
     public function testApc()
     {
-        $factory = new CacheFactory();
+        $factory = new StashCacheFactory();
         try {
             $config = m::mock('Zend\Config\Config');
             $config->shouldReceive('toArray')->once()->andReturn([
@@ -107,7 +107,7 @@ final class CacheFactoryTest extends SimpleTestCase
 
     public function testMemcache()
     {
-        $factory = new CacheFactory();
+        $factory = new StashCacheFactory();
         try {
             $config = m::mock('Zend\Config\Config');
             $config->shouldReceive('toArray')->once()->andReturn([
@@ -127,7 +127,7 @@ final class CacheFactoryTest extends SimpleTestCase
 
     public function testRedis()
     {
-        $factory = new CacheFactory();
+        $factory = new StashCacheFactory();
         try {
             $config = m::mock('Zend\Config\Config');
             $config->shouldReceive('toArray')->once()->andReturn([

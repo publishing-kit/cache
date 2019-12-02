@@ -18,7 +18,7 @@
     ],
     "require": {
         "php": "~7.2",
-        "tedivm/stash": "^0.15.2",
+        "psr/cache": "~1.0",
         "zendframework/zend-config": "^3.3"
     },
     "require-dev": {
@@ -26,6 +26,7 @@
         "php-coveralls/php-coveralls": "^2.1",
         "phpunit/phpunit": ">=7.0",
         "squizlabs/php_codesniffer": "^3.0",
+        "tedivm/stash": "^0.15.2",
         "vimeo/psalm": "^3.4"
     },
     "autoload": {

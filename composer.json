@@ -1,0 +1,51 @@
+{
+    "name": "publishing-kit/cache",
+    "type": "library",
+    "description": "Cache factory and wrapper for the PublishingKit project",
+    "keywords": [
+        "publishing-kit",
+        "cache"
+    ],
+    "homepage": "https://github.com/publishing-kit/cache",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Matthew Daly",
+            "email": "450801+matthewbdaly@users.noreply.github.com",
+            "homepage": "https://matthewdaly.co.uk",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php" : "~7.2"
+    },
+    "require-dev": {
+        "php-coveralls/php-coveralls": "^2.1",
+        "phpunit/phpunit" : ">=7.0",
+        "squizlabs/php_codesniffer": "^3.0",
+        "vimeo/psalm": "^3.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "PublishingKit\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "phpunit",
+        "check-style": "phpcs src tests",
+        "fix-style": "phpcbf src tests"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    }
+}

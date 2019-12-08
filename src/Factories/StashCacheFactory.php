@@ -14,16 +14,15 @@ use Stash\Driver\Memcache;
 use Stash\Driver\Redis;
 use Stash\Driver\Sqlite;
 use Stash\Interfaces\DriverInterface;
-use Zend\Config\Config;
 use PublishingKit\Cache\Contracts\Factories\CacheFactory;
 use Psr\Cache\CacheItemPoolInterface;
 use PublishingKit\Cache\Exceptions\Factories\PathNotSet;
 
 final class StashCacheFactory implements CacheFactory
 {
-    public function make(Config $config): CacheItemPoolInterface
+    public function make(array $config): CacheItemPoolInterface
     {
-        $driver = $this->createAdapter($config->toArray());
+        $driver = $this->createAdapter($config);
         return new Pool($driver);
     }
 

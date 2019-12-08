@@ -135,12 +135,18 @@ final class Psr6CacheTest extends SimpleTestCase
         $item->shouldReceive('isHit')->once()->andReturn(true);
         $item->shouldReceive('get')->once()->andReturn('bar');
         $this->cache->shouldReceive('getItem')->with('foo')->once()->andReturn($item);
-        $this->assertEquals('bar', $this->wrapper->rememberForever('foo', new class {
-            public function __invoke()
-            {
-                return 'baz';
-            }
-        }));
+        $this->assertEquals(
+            'bar',
+            $this->wrapper->rememberForever(
+                'foo',
+                new class {
+                    public function __invoke()
+                    {
+                        return 'baz';
+                    }
+                }
+            )
+        );
     }
 
     public function testRememberForeverFalse()
@@ -162,12 +168,18 @@ final class Psr6CacheTest extends SimpleTestCase
         $item->shouldReceive('set')->with('baz')->once();
         $this->cache->shouldReceive('getItem')->with('foo')->once()->andReturn($item);
         $this->cache->shouldReceive('save')->with($item)->once();
-        $this->assertEquals('baz', $this->wrapper->rememberForever('foo', new class {
-            public function __invoke()
-            {
-                return 'baz';
-            }
-        }));
+        $this->assertEquals(
+            'baz',
+            $this->wrapper->rememberForever(
+                'foo',
+                new class {
+                    public function __invoke()
+                    {
+                        return 'baz';
+                    }
+                }
+            )
+        );
     }
 
     public function testRememberTrue()
@@ -195,12 +207,19 @@ final class Psr6CacheTest extends SimpleTestCase
         $item->shouldReceive('isHit')->once()->andReturn(true);
         $item->shouldReceive('get')->once()->andReturn('bar');
         $this->cache->shouldReceive('getItem')->with('foo')->once()->andReturn($item);
-        $this->assertEquals('bar', $this->wrapper->remember('foo', 300, new class {
-            public function __invoke()
-            {
-                return 'baz';
-            }
-        }));
+        $this->assertEquals(
+            'bar',
+            $this->wrapper->remember(
+                'foo',
+                300,
+                new class {
+                    public function __invoke()
+                    {
+                        return 'baz';
+                    }
+                }
+            )
+        );
     }
 
     public function testRememberFalse()
@@ -211,9 +230,16 @@ final class Psr6CacheTest extends SimpleTestCase
         $item->shouldReceive('expiresAfter')->with(300)->once();
         $this->cache->shouldReceive('getItem')->with('foo')->once()->andReturn($item);
         $this->cache->shouldReceive('save')->with($item)->once();
-        $this->assertEquals('baz', $this->wrapper->remember('foo', 300, function () {
-            return 'baz';
-        }));
+        $this->assertEquals(
+            'baz',
+            $this->wrapper->remember(
+                'foo',
+                300,
+                function () {
+                    return 'baz';
+                }
+            )
+        );
     }
 
     public function testRememberFalseWithInvokable()
@@ -224,12 +250,19 @@ final class Psr6CacheTest extends SimpleTestCase
         $item->shouldReceive('expiresAfter')->with(300)->once();
         $this->cache->shouldReceive('getItem')->with('foo')->once()->andReturn($item);
         $this->cache->shouldReceive('save')->with($item)->once();
-        $this->assertEquals('baz', $this->wrapper->remember('foo', 300, new class {
-            public function __invoke()
-            {
-                return 'baz';
-            }
-        }));
+        $this->assertEquals(
+            'baz',
+            $this->wrapper->remember(
+                'foo',
+                300,
+                new class {
+                    public function __invoke()
+                    {
+                        return 'baz';
+                    }
+                }
+            )
+        );
     }
 
     public function testRememberFalseWithExpiryDate()
@@ -241,9 +274,16 @@ final class Psr6CacheTest extends SimpleTestCase
         $item->shouldReceive('expiresAt')->with($dt)->once();
         $this->cache->shouldReceive('getItem')->with('foo')->once()->andReturn($item);
         $this->cache->shouldReceive('save')->with($item)->once();
-        $this->assertEquals('baz', $this->wrapper->remember('foo', $dt, function () {
-            return 'baz';
-        }));
+        $this->assertEquals(
+            'baz',
+            $this->wrapper->remember(
+                'foo',
+                $dt,
+                function () {
+                    return 'baz';
+                }
+            )
+        );
     }
 
     public function testRememberFalseWithInvokableAndExpiryDate()
@@ -255,12 +295,19 @@ final class Psr6CacheTest extends SimpleTestCase
         $item->shouldReceive('expiresAt')->with($dt)->once();
         $this->cache->shouldReceive('getItem')->with('foo')->once()->andReturn($item);
         $this->cache->shouldReceive('save')->with($item)->once();
-        $this->assertEquals('baz', $this->wrapper->remember('foo', $dt, new class {
-            public function __invoke()
-            {
-                return 'baz';
-            }
-        }));
+        $this->assertEquals(
+            'baz',
+            $this->wrapper->remember(
+                'foo',
+                $dt,
+                new class {
+                    public function __invoke()
+                    {
+                        return 'baz';
+                    }
+                }
+            )
+        );
     }
 
     public function testFlush()

@@ -15,7 +15,9 @@ final class StashCacheFactoryTest extends SimpleTestCase
     {
         $factory = new StashCacheFactory();
         $config = m::mock('Zend\Config\Config');
-        $config->shouldReceive('toArray')->once()->andReturn([]);
+        $config->shouldReceive('toArray')->once()->andReturn([
+            'path' => 'tests/filesystem/cache',
+        ]);
         $pool = $factory->make($config);
         $this->assertInstanceOf('Stash\Pool', $pool);
         $this->assertInstanceOf('Stash\Driver\FileSystem', $pool->getDriver());
@@ -26,6 +28,7 @@ final class StashCacheFactoryTest extends SimpleTestCase
         $factory = new StashCacheFactory();
         $config = m::mock('Zend\Config\Config');
         $config->shouldReceive('toArray')->once()->andReturn([
+            'path' => 'tests/filesystem/cache',
             'driver' => 'filesystem',
             'filePermissions' => 0660,
             'dirPermissions' => 0770,
@@ -34,6 +37,20 @@ final class StashCacheFactoryTest extends SimpleTestCase
         $pool = $factory->make($config);
         $this->assertInstanceOf('Stash\Pool', $pool);
         $this->assertInstanceOf('Stash\Driver\FileSystem', $pool->getDriver());
+    }
+
+    public function testFilesystemPathNotSet()
+    {
+        $this->expectException('PublishingKit\Cache\Exceptions\Factories\PathNotSet');
+        $factory = new StashCacheFactory();
+        $config = m::mock('Zend\Config\Config');
+        $config->shouldReceive('toArray')->once()->andReturn([
+            'driver' => 'filesystem',
+            'filePermissions' => 0660,
+            'dirPermissions' => 0770,
+            'dirSplit' => 2,
+        ]);
+        $pool = $factory->make($config);
     }
 
     public function testBlackhole()
@@ -70,6 +87,7 @@ final class StashCacheFactoryTest extends SimpleTestCase
                 'driver' => 'ephemeral',
             ], [
                 'driver' => 'filesystem',
+                'path' => 'tests/filesystem/cache',
             ]]
         ]);
         $pool = $factory->make($config);

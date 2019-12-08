@@ -17,6 +17,7 @@ use Stash\Interfaces\DriverInterface;
 use Zend\Config\Config;
 use PublishingKit\Cache\Contracts\Factories\CacheFactory;
 use Psr\Cache\CacheItemPoolInterface;
+use PublishingKit\Cache\Exceptions\Factories\PathNotSet;
 
 final class StashCacheFactory implements CacheFactory
 {
@@ -62,8 +63,11 @@ final class StashCacheFactory implements CacheFactory
 
     private function createFilesystemAdapter(array $config): FileSystem
     {
+        if (!isset($config['path'])) {
+            throw new PathNotSet('Path must be set for the filesystem adapter');
+        }
         $adapterConfig = [
-            'path' => isset($config['path']) ? BASE_DIR . '/' . $config['path'] : null,
+            'path' => $config['path'],
         ];
         if (isset($config['dirSplit'])) {
             $adapterConfig['dirSplit'] = $config['dirSplit'];

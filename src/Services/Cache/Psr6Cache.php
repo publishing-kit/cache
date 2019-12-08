@@ -7,6 +7,7 @@ namespace PublishingKit\Cache\Services\Cache;
 use PublishingKit\Cache\Contracts\Services\CacheContract;
 use Psr\Cache\CacheItemPoolInterface;
 use TypeError;
+use DateTime;
 
 final class Psr6Cache implements CacheContract
 {
@@ -45,7 +46,7 @@ final class Psr6Cache implements CacheContract
         if (is_int($expiry)) {
             $item->expiresAfter($expiry);
         }
-        if (is_a($expiry, 'DateTime')) {
+        if ($expiry instanceof DateTime) {
             $item->expiresAt($expiry);
         }
         $this->cache->save($item);
@@ -93,7 +94,7 @@ final class Psr6Cache implements CacheContract
             if (is_int($expiry)) {
                 $item->expiresAfter($expiry);
             }
-            if (is_a($expiry, 'DateTime')) {
+            if ($expiry instanceof DateTime) {
                 $item->expiresAt($expiry);
             }
             $this->cache->save($item);

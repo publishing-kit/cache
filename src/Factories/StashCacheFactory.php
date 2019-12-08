@@ -34,10 +34,10 @@ final class StashCacheFactory implements CacheFactory
         }
         switch ($config['driver']) {
             case 'test':
-                $driver = $this->createBlackHoleAdapter($config);
+                $driver = $this->createBlackHoleAdapter();
                 break;
             case 'ephemeral':
-                $driver = $this->createEphemeralAdapter($config);
+                $driver = $this->createEphemeralAdapter();
                 break;
             case 'composite':
                 $driver = $this->createCompositeAdapter($config);
@@ -81,12 +81,12 @@ final class StashCacheFactory implements CacheFactory
         return new FileSystem($adapterConfig);
     }
 
-    private function createBlackHoleAdapter(array $config): BlackHole
+    private function createBlackHoleAdapter(): BlackHole
     {
         return new BlackHole();
     }
     
-    private function createEphemeralAdapter(array $config): Ephemeral
+    private function createEphemeralAdapter(): Ephemeral
     {
         return new Ephemeral();
     }

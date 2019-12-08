@@ -2,7 +2,7 @@
 
 Contributions are **welcome** and will be fully **credited**.
 
-We accept contributions via Pull Requests on [Github](https://github.com/publishing-kit/cache).
+We accept contributions via Pull Requests on [Github](https://github.com/:vendor/:package_name).
 
 
 ## Pull Requests
@@ -10,6 +10,8 @@ We accept contributions via Pull Requests on [Github](https://github.com/publish
 - **[PSR-12 Coding Standard](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-12-coding-style-guide.md)** - Check the code style with ``$ composer check-style`` and fix it with ``$ composer fix-style``.
 
 - **Add tests!** - Your patch won't be accepted if it doesn't have tests.
+
+- **Fix any issues Psalm raises** - It's not necessarily a deal breaker if Psalm throws an error on your pull request that simply can't be resolved, but please run it with `$ composer psalm`, and do your best to fix any issues it raises before submitting your pull request. We try to keep the code base as type-safe as possible, and Psalm is a big part of that.
 
 - **Document any change in behaviour** - Make sure the `README.md` and any other relevant documentation are kept up-to-date.
 

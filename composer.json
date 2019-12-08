@@ -43,7 +43,8 @@
     "scripts": {
         "test": "phpunit",
         "check-style": "phpcs src tests",
-        "fix-style": "phpcbf src tests"
+        "fix-style": "phpcbf src tests",
+        "psalm": "psalm"
     },
     "extra": {
         "branch-alias": {

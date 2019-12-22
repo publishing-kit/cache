@@ -56,4 +56,22 @@ final class SymfonyCacheFactoryTest extends SimpleTestCase
         $this->assertInstanceOf('Symfony\Contracts\Cache\CacheInterface', $pool);
         $this->assertInstanceOf('Psr\Cache\CacheItemPoolInterface', $pool);
     }
+
+    public function testMemcached()
+    {
+        $factory = new SymfonyCacheFactory();
+        try {
+            $pool = $factory->make([
+                'driver' => 'memcached',
+                'servers' => [[
+                    'memcached://127.0.0.1:11211',
+                ]]
+            ]);
+        } catch (CacheException $e) {
+            $this->markTestSkipped('Dependency not installed');
+        }
+        $this->assertInstanceOf('Symfony\Component\Cache\Adapter\MemcachedAdapter', $pool);
+        $this->assertInstanceOf('Symfony\Contracts\Cache\CacheInterface', $pool);
+        $this->assertInstanceOf('Psr\Cache\CacheItemPoolInterface', $pool);
+    }
 }

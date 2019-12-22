@@ -16,6 +16,7 @@ final class SymfonyCacheFactoryTest extends SimpleTestCase
         $pool = $factory->make([]);
         $this->assertInstanceOf('Symfony\Component\Cache\Adapter\FilesystemAdapter', $pool);
         $this->assertInstanceOf('Symfony\Contracts\Cache\CacheInterface', $pool);
+        $this->assertInstanceOf('Psr\Cache\CacheItemPoolInterface', $pool);
     }
 
     public function testFilesystem()
@@ -26,5 +27,6 @@ final class SymfonyCacheFactoryTest extends SimpleTestCase
         ]);
         $this->assertInstanceOf('Symfony\Component\Cache\Adapter\FilesystemAdapter', $pool);
         $this->assertInstanceOf('Symfony\Contracts\Cache\CacheInterface', $pool);
+        $this->assertInstanceOf('Psr\Cache\CacheItemPoolInterface', $pool);
     }
 }

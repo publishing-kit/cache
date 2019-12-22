@@ -132,15 +132,6 @@ final class StashCacheFactory implements CacheFactory
         if (isset($config['prefix_key'])) {
             $options['prefix_key'] = $config['prefix_key'];
         }
-        if (isset($config['libketama_compatible'])) {
-            $options['libketama_compatible'] = $config['libketama_compatible'];
-        }
-        if (isset($config['cache_lookups'])) {
-            $options['cache_lookups'] = $config['cache_lookups'];
-        }
-        if (isset($config['serializer'])) {
-            $options['serializer'] = $config['serializer'];
-        }
         return new Memcache($options);
     }
 

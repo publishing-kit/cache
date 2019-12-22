@@ -125,10 +125,10 @@ final class StashCacheFactory implements CacheFactory
     {
         return new Memcache([
             'servers' => isset($config['servers']) ? $config['servers'] : null,
-            'extension' => 'memcached',
+            'extension' => isset($config['extension']) ? $config['extension'] : 'memcached',
             'prefix_key' => isset($config['prefix_key']) ? $config['prefix_key'] : null,
             'libketama_compatible' => isset($config['libketama_compatible']) ? $config['libketama_compatible'] : true,
-            'cache_lookups' => isset($config['cache_lookups']) ? $config['cache_lookups'] : true,
+            'cache_lookups' => isset($config['cache_lookups']) ? $config['cache_lookups'] : false,
             'serializer' => isset($config['serializer']) ? $config['serializer'] : 'json',
         ]);
     }

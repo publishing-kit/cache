@@ -69,7 +69,6 @@ final class SymfonyCacheFactory implements CacheFactory
 
     private function createRedisAdapter(array $config): RedisAdapter
     {
-
         $client = RedisAdapter::createConnection(
             $config['server']
         );

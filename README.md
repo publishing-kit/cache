@@ -7,9 +7,16 @@
 [![Quality Score][ico-code-quality]][link-code-quality]
 [![Total Downloads][ico-downloads]][link-downloads]
 
-PublishingKit/Cache is a wrapper around `tedivm/stash` to make it more convenient to work with, as well as a factory class to instantiate the Stash instance.
+PublishingKit/Cache is a wrapper around a PSR6-compatible caching library to make it more convenient to work with.
 
-In theory it should also be easy to add support for other PSR6-compatible caches - support for these is coming.
+In addition, it also provides factory classes for creating instances of the following caches:
+
+* `tedivm/stash`
+* `symfony/cache`
+
+However, the factory classes do not support every driver.
+
+In theory it should also be easy to add support for other PSR6-compatible caches.
 
 ## Structure
 
@@ -37,8 +44,7 @@ $ composer require publishing-kit/cache
 ## Usage
 
 ``` php
-$skeleton = new PublishingKit();
-echo $skeleton->echoPhrase('Hello, League!');
+$wrapper = new PublishingKit\Cache\Services\Cache\Psr6Cache($cache);
 ```
 
 ## Change log

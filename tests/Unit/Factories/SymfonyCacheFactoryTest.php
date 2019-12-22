@@ -6,6 +6,7 @@ namespace Tests\Unit\Factories;
 
 use Tests\SimpleTestCase;
 use PublishingKit\Cache\Factories\SymfonyCacheFactory;
+use Symfony\Component\Cache\Exception\CacheException;
 use Mockery as m;
 
 final class SymfonyCacheFactoryTest extends SimpleTestCase
@@ -37,6 +38,21 @@ final class SymfonyCacheFactoryTest extends SimpleTestCase
             'driver' => 'array',
         ]);
         $this->assertInstanceOf('Symfony\Component\Cache\Adapter\ArrayAdapter', $pool);
+        $this->assertInstanceOf('Symfony\Contracts\Cache\CacheInterface', $pool);
+        $this->assertInstanceOf('Psr\Cache\CacheItemPoolInterface', $pool);
+    }
+
+    public function testApcu()
+    {
+        $factory = new SymfonyCacheFactory();
+        try {
+            $pool = $factory->make([
+                'driver' => 'apcu',
+            ]);
+        } catch (CacheException $e) {
+            $this->markTestSkipped('Dependency not installed');
+        }
+        $this->assertInstanceOf('Symfony\Component\Cache\Adapter\ApcuAdapter', $pool);
         $this->assertInstanceOf('Symfony\Contracts\Cache\CacheInterface', $pool);
         $this->assertInstanceOf('Psr\Cache\CacheItemPoolInterface', $pool);
     }

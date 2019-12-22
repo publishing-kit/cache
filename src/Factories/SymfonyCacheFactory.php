@@ -8,6 +8,7 @@ use Psr\Cache\CacheItemPoolInterface;
 use PublishingKit\Cache\Contracts\Factories\CacheFactory;
 use Symfony\Component\Cache\Adapter\FilesystemAdapter;
 use Symfony\Component\Cache\Adapter\ArrayAdapter;
+use Symfony\Component\Cache\Adapter\ApcuAdapter;
 
 final class SymfonyCacheFactory implements CacheFactory
 {
@@ -25,6 +26,9 @@ final class SymfonyCacheFactory implements CacheFactory
             case 'array':
                 $driver = $this->createArrayAdapter($config);
                 break;
+            case 'apcu':
+                $driver = $this->createApcuAdapter($config);
+                break;
             default:
                 $driver = $this->createFilesystemAdapter($config);
                 break;
@@ -40,5 +44,10 @@ final class SymfonyCacheFactory implements CacheFactory
     private function createArrayAdapter(array $config): ArrayAdapter
     {
         return new ArrayAdapter();
+    }
+
+    private function createApcuAdapter(array $config): ApcuAdapter
+    {
+        return new ApcuAdapter();
     }
 }

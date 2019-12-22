@@ -24,27 +24,6 @@ then
   echo "Finished installing apcu extension."
 fi
 
-
-echo ""
-echo "******************************"
-echo "Installing memcache extension"
-echo "******************************"
-set +e
-sudo apt-get -y install unzip zlib1g-dev
-wget https://github.com/websupport-sk/pecl-memcache/archive/NON_BLOCKING_IO_php7.zip
-unzip NON_BLOCKING_IO_php7.zip
-cd pecl-memcache-NON_BLOCKING_IO_php7
-phpize
-./configure --enable-memcache
-make
-sudo make install
-cd ..
-rm -Rf pecl-memcache-NON_BLOCKING_IO_php7
-rm -Rf NON_BLOCKING_IO_php7.zip
-set -e
-echo "Finished installing memcache extension."
-
-
 echo ""
 echo "******************************"
 echo "Installing memcached extension"

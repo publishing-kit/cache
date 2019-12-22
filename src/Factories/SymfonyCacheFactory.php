@@ -11,6 +11,7 @@ use Symfony\Component\Cache\Adapter\ArrayAdapter;
 use Symfony\Component\Cache\Adapter\ApcuAdapter;
 use Symfony\Component\Cache\Adapter\MemcachedAdapter;
 use Symfony\Component\Cache\Adapter\RedisAdapter;
+use Symfony\Component\Cache\Adapter\PhpFilesAdapter;
 
 final class SymfonyCacheFactory implements CacheFactory
 {
@@ -36,6 +37,9 @@ final class SymfonyCacheFactory implements CacheFactory
                 break;
             case 'redis':
                 $driver = $this->createRedisAdapter($config);
+                break;
+            case 'phpfiles':
+                $driver = $this->createPhpFiles($config);
                 break;
             default:
                 $driver = $this->createFilesystemAdapter($config);
@@ -73,5 +77,10 @@ final class SymfonyCacheFactory implements CacheFactory
             $config['server']
         );
         return new RedisAdapter($client);
+    }
+
+    private function createPhpFiles(array $config): PhpFilesAdapter
+    {
+        return new PhpFilesAdapter();
     }
 }

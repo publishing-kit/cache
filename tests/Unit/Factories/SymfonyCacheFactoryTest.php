@@ -90,4 +90,15 @@ final class SymfonyCacheFactoryTest extends SimpleTestCase
         $this->assertInstanceOf('Symfony\Contracts\Cache\CacheInterface', $pool);
         $this->assertInstanceOf('Psr\Cache\CacheItemPoolInterface', $pool);
     }
+
+    public function testPhpFiles()
+    {
+        $factory = new SymfonyCacheFactory();
+        $pool = $factory->make([
+            'driver' => 'phpfiles',
+        ]);
+        $this->assertInstanceOf('Symfony\Component\Cache\Adapter\PhpFilesAdapter', $pool);
+        $this->assertInstanceOf('Symfony\Contracts\Cache\CacheInterface', $pool);
+        $this->assertInstanceOf('Psr\Cache\CacheItemPoolInterface', $pool);
+    }
 }

@@ -125,7 +125,8 @@ final class StashCacheFactoryTest extends SimpleTestCase
                     '127.0.0.1',
                     '11211'
                 ]],
-                'prefix_key' => 'test'
+                'prefix_key' => 'test',
+                'libketama_compatible' => true
             ];
             $pool = $factory->make($config);
         /* } catch (RuntimeException $e) { */

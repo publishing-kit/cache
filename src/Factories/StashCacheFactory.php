@@ -127,9 +127,9 @@ final class StashCacheFactory implements CacheFactory
             'servers' => isset($config['servers']) ? $config['servers'] : null,
             'extension' => 'memcached',
             'prefix_key' => isset($config['prefix_key']) ? $config['prefix_key'] : null,
-            'libketama_compatible' => isset($config['libketama_compatible']) ? $config['libketama_compatible'] : null,
-            'cache_lookups' => isset($config['cache_lookups']) ? $config['cache_lookups'] : null,
-            'serializer' => isset($config['serializer']) ? $config['serializer'] : null,
+            'libketama_compatible' => isset($config['libketama_compatible']) ? $config['libketama_compatible'] : true,
+            'cache_lookups' => isset($config['cache_lookups']) ? $config['cache_lookups'] : true,
+            'serializer' => isset($config['serializer']) ? $config['serializer'] : 'json',
         ]);
     }
 

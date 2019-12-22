@@ -74,4 +74,20 @@ final class SymfonyCacheFactoryTest extends SimpleTestCase
         $this->assertInstanceOf('Symfony\Contracts\Cache\CacheInterface', $pool);
         $this->assertInstanceOf('Psr\Cache\CacheItemPoolInterface', $pool);
     }
+
+    public function testRedis()
+    {
+        $factory = new SymfonyCacheFactory();
+        try {
+            $pool = $factory->make([
+                'driver' => 'redis',
+                'server' => 'redis://127.0.0.1:6379',
+            ]);
+        } catch (CacheException $e) {
+            $this->markTestSkipped('Dependency not installed');
+        }
+        $this->assertInstanceOf('Symfony\Component\Cache\Adapter\RedisAdapter', $pool);
+        $this->assertInstanceOf('Symfony\Contracts\Cache\CacheInterface', $pool);
+        $this->assertInstanceOf('Psr\Cache\CacheItemPoolInterface', $pool);
+    }
 }

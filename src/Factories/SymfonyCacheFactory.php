@@ -10,6 +10,7 @@ use Symfony\Component\Cache\Adapter\FilesystemAdapter;
 use Symfony\Component\Cache\Adapter\ArrayAdapter;
 use Symfony\Component\Cache\Adapter\ApcuAdapter;
 use Symfony\Component\Cache\Adapter\MemcachedAdapter;
+use Symfony\Component\Cache\Adapter\RedisAdapter;
 
 final class SymfonyCacheFactory implements CacheFactory
 {
@@ -32,6 +33,9 @@ final class SymfonyCacheFactory implements CacheFactory
                 break;
             case 'memcached':
                 $driver = $this->createMemcachedAdapter($config);
+                break;
+            case 'redis':
+                $driver = $this->createRedisAdapter($config);
                 break;
             default:
                 $driver = $this->createFilesystemAdapter($config);
@@ -60,6 +64,15 @@ final class SymfonyCacheFactory implements CacheFactory
         $client = MemcachedAdapter::createConnection(
             $config['servers']
         );
-        return new MemcachedAdapter();
+        return new MemcachedAdapter($client);
+    }
+
+    private function createRedisAdapter(array $config): RedisAdapter
+    {
+
+        $client = RedisAdapter::createConnection(
+            $config['server']
+        );
+        return new RedisAdapter($client);
     }
 }

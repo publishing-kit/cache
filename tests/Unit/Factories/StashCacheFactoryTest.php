@@ -124,7 +124,8 @@ final class StashCacheFactoryTest extends SimpleTestCase
                 'servers' => [[
                     '127.0.0.1',
                     '11211'
-                ]]
+                ]],
+                'prefix_key' => 'test'
             ];
             $pool = $factory->make($config);
         /* } catch (RuntimeException $e) { */

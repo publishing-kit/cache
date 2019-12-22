@@ -63,9 +63,9 @@ final class SymfonyCacheFactoryTest extends SimpleTestCase
         try {
             $pool = $factory->make([
                 'driver' => 'memcached',
-                'servers' => [[
+                'server' => [
                     'memcached://127.0.0.1:11211',
-                ]]
+                ]
             ]);
         } catch (CacheException $e) {
             $this->markTestSkipped('Dependency not installed');

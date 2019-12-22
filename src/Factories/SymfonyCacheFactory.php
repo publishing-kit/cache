@@ -66,7 +66,7 @@ final class SymfonyCacheFactory implements CacheFactory
     private function createMemcachedAdapter(array $config): MemcachedAdapter
     {
         $client = MemcachedAdapter::createConnection(
-            $config['servers']
+            $config['server']
         );
         return new MemcachedAdapter($client);
     }

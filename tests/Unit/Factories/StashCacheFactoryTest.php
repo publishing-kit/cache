@@ -121,6 +121,7 @@ final class StashCacheFactoryTest extends SimpleTestCase
         try {
             $config = [
                 'driver' => 'memcache',
+                'extension' => 'memcached',
                 'servers' => [[
                     '127.0.0.1',
                     '11211'

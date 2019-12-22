@@ -10,10 +10,20 @@ use Mockery as m;
 
 final class SymfonyCacheFactoryTest extends SimpleTestCase
 {
-    public function testFilesystem()
+    public function testDefault()
     {
         $factory = new SymfonyCacheFactory();
         $pool = $factory->make([]);
+        $this->assertInstanceOf('Symfony\Component\Cache\Adapter\FilesystemAdapter', $pool);
+        $this->assertInstanceOf('Symfony\Contracts\Cache\CacheInterface', $pool);
+    }
+
+    public function testFilesystem()
+    {
+        $factory = new SymfonyCacheFactory();
+        $pool = $factory->make([
+            'driver' => 'filesystem',
+        ]);
         $this->assertInstanceOf('Symfony\Component\Cache\Adapter\FilesystemAdapter', $pool);
         $this->assertInstanceOf('Symfony\Contracts\Cache\CacheInterface', $pool);
     }

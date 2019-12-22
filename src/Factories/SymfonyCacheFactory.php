@@ -7,6 +7,7 @@ namespace PublishingKit\Cache\Factories;
 use Psr\Cache\CacheItemPoolInterface;
 use PublishingKit\Cache\Contracts\Factories\CacheFactory;
 use Symfony\Component\Cache\Adapter\FilesystemAdapter;
+use Symfony\Component\Cache\Adapter\ArrayAdapter;
 
 final class SymfonyCacheFactory implements CacheFactory
 {
@@ -21,6 +22,9 @@ final class SymfonyCacheFactory implements CacheFactory
             $config['driver'] = 'filesystem';
         }
         switch ($config['driver']) {
+            case 'array':
+                $driver = $this->createArrayAdapter($config);
+                break;
             default:
                 $driver = $this->createFilesystemAdapter($config);
                 break;
@@ -31,5 +35,10 @@ final class SymfonyCacheFactory implements CacheFactory
     private function createFilesystemAdapter(array $config): FilesystemAdapter
     {
         return new FilesystemAdapter();
+    }
+
+    private function createArrayAdapter(array $config): ArrayAdapter
+    {
+        return new ArrayAdapter();
     }
 }

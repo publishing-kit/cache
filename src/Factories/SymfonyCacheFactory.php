@@ -12,6 +12,7 @@ use Symfony\Component\Cache\Adapter\ApcuAdapter;
 use Symfony\Component\Cache\Adapter\MemcachedAdapter;
 use Symfony\Component\Cache\Adapter\RedisAdapter;
 use Symfony\Component\Cache\Adapter\PhpFilesAdapter;
+use Symfony\Component\Cache\Adapter\PhpArrayAdapter;
 
 final class SymfonyCacheFactory implements CacheFactory
 {
@@ -40,6 +41,9 @@ final class SymfonyCacheFactory implements CacheFactory
                 break;
             case 'phpfiles':
                 $driver = $this->createPhpFiles($config);
+                break;
+            case 'phparray':
+                $driver = $this->createPhpArray($config);
                 break;
             default:
                 $driver = $this->createFilesystemAdapter($config);
@@ -82,5 +86,13 @@ final class SymfonyCacheFactory implements CacheFactory
     private function createPhpFiles(array $config): PhpFilesAdapter
     {
         return new PhpFilesAdapter();
+    }
+
+    private function createPhpArray(array $config): PhpArrayAdapter
+    {
+        return new PhpArrayAdapter(
+            $config['path'],
+            $this->createAdapter($config['backup'])
+        );
     }
 }

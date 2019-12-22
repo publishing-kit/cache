@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PublishingKit\Cache\Contracts\Services;
 
+use Psr\Cache\CacheItemPoolInterface;
+
 interface CacheContract
 {
     /**
@@ -68,4 +70,11 @@ interface CacheContract
      * Flush cache
      */
     public function flush(): void;
+
+    /**
+     * Get the cache instance
+     *
+     * @return CacheItemPoolInterface
+     */
+    public function getCache(): CacheItemPoolInterface;
 }

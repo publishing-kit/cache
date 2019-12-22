@@ -125,4 +125,9 @@ final class Psr6Cache implements CacheContract
     {
         $this->cache->clear();
     }
+
+    public function getCache(): CacheItemPoolInterface
+    {
+        return $this->cache;
+    }
 }

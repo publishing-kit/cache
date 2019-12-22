@@ -315,4 +315,11 @@ final class Psr6CacheTest extends SimpleTestCase
         $this->cache->shouldReceive('clear')->once();
         $this->wrapper->flush();
     }
+
+    public function testGetCache()
+    {
+        $cache = $this->wrapper->getCache();
+        $this->assertInstanceOf('Psr\Cache\CacheItemPoolInterface', $cache);
+        $this->assertSame($cache, $this->cache);
+    }
 }

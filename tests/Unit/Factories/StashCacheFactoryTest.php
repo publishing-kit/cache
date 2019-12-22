@@ -118,7 +118,7 @@ final class StashCacheFactoryTest extends SimpleTestCase
     public function testMemcache()
     {
         $factory = new StashCacheFactory();
-        /* try { */
+        try {
             $config = [
                 'driver' => 'memcache',
                 'servers' => [[
@@ -126,11 +126,12 @@ final class StashCacheFactoryTest extends SimpleTestCase
                     '11211'
                 ]],
                 'prefix_key' => 'test',
+                'extension' => 'memcached',
             ];
             $pool = $factory->make($config);
-        /* } catch (RuntimeException $e) { */
-        /*     $this->markTestSkipped('Dependency not installed'); */
-        /* } */
+        } catch (RuntimeException $e) {
+            $this->markTestSkipped('Dependency not installed');
+        }
         $this->assertInstanceOf('Stash\Pool', $pool);
         $this->assertInstanceOf('Stash\Driver\Memcache', $pool->getDriver());
     }

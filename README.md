@@ -14,24 +14,9 @@ In addition, it also provides factory classes for creating instances of the foll
 * `tedivm/stash`
 * `symfony/cache`
 
-However, the factory classes do not support every driver.
+However, the factory classes do not support every driver. If your driver of choice is not supported, feel free to submit a pull request for this.
 
-In theory it should also be easy to add support for other PSR6-compatible caches.
-
-## Structure
-
-If any of the following are applicable to your project, then the directory structure should follow industry best practices by being named the following.
-
-```
-bin/        
-build/
-docs/
-config/
-src/
-tests/
-vendor/
-```
-
+In theory it should also be easy to add support for other PSR6-compatible caches, such as PHP Cache. Again, if you want to see factory classes added for those caches, please submit a pull request.
 
 ## Install
 
@@ -43,8 +28,32 @@ $ composer require publishing-kit/cache
 
 ## Usage
 
+The wrapper can be instantiated by passing in any cache object that implements PSR6:
 ``` php
 $wrapper = new PublishingKit\Cache\Services\Cache\Psr6Cache($cache);
+```
+
+The factory classes accept an array describing the cache in question. Here we create a Stash instance using Redis:
+
+```php
+$factory = new PublishingKit\Cache\Factories\StashCacheFactory();
+$cache = $factory->make([
+        'driver' => 'redis',
+        'servers' => [[
+        '127.0.0.1',
+        '6379'
+    ]]
+]);
+```
+
+And here we do the same for Symfony Cache:
+
+```php
+$factory = new SymfonyCacheFactory();
+$cache = $factory->make([
+    'driver' => 'redis',
+    'server' => 'redis://127.0.0.1:6379',
+]);
 ```
 
 ## Change log

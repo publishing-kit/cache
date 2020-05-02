@@ -8,6 +8,7 @@ use Cache\Adapter\Doctrine\DoctrineCachePool;
 use Doctrine\Common\Cache\ArrayCache;
 use Doctrine\Common\Cache\Cache;
 use Doctrine\Common\Cache\FilesystemCache;
+use Doctrine\Common\Cache\PhpFileCache;
 use Psr\Cache\CacheItemPoolInterface;
 use PublishingKit\Cache\Contracts\Factories\CacheFactory;
 use PublishingKit\Cache\Exceptions\Factories\PathNotSet;
@@ -28,6 +29,9 @@ final class DoctrineCacheFactory implements CacheFactory
             case 'array':
                 $driver = $this->createArrayAdapter();
                 break;
+            case 'php-files':
+                $driver = $this->createPhpFilesAdapter($config);
+                break;
             default:
                 $driver = $this->createFilesystemAdapter($config);
                 break;
@@ -46,5 +50,13 @@ final class DoctrineCacheFactory implements CacheFactory
     private function createArrayAdapter(): ArrayCache
     {
         return new ArrayCache();
+    }
+
+    private function createPhpFilesAdapter(array $config): PhpFileCache
+    {
+        if (!isset($config['path'])) {
+            throw new PathNotSet('Path must be set for the PHP file adapter');
+        }
+        return new PhpFileCache($config['path']);
     }
 }

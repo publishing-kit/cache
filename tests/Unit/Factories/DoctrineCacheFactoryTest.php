@@ -53,4 +53,26 @@ final class DoctrineCacheFactoryTest extends SimpleTestCase
         $this->assertInstanceOf('Psr\Cache\CacheItemPoolInterface', $pool);
         $this->assertInstanceOf('Doctrine\Common\Cache\ArrayCache', $pool->getCache());
     }
+
+    public function testPhpFiles()
+    {
+        $factory = new DoctrineCacheFactory();
+        $pool = $factory->make([
+            'driver' => 'php-files',
+            'path' => 'tests/filesystem/cache',
+        ]);
+        $this->assertInstanceOf('Cache\Adapter\Doctrine\DoctrineCachePool', $pool);
+        $this->assertInstanceOf('Psr\Cache\CacheItemPoolInterface', $pool);
+        $this->assertInstanceOf('Doctrine\Common\Cache\PhpFileCache', $pool->getCache());
+    }
+
+    public function testPhpFilesPathNotSet()
+    {
+        $this->expectException('PublishingKit\Cache\Exceptions\Factories\PathNotSet');
+        $factory = new DoctrineCacheFactory();
+        $config = [
+            'driver' => 'php-files',
+        ];
+        $pool = $factory->make($config);
+    }
 }

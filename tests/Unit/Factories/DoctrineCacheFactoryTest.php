@@ -75,4 +75,15 @@ final class DoctrineCacheFactoryTest extends SimpleTestCase
         ];
         $pool = $factory->make($config);
     }
+
+    public function testVoid()
+    {
+        $factory = new DoctrineCacheFactory();
+        $pool = $factory->make([
+            'driver' => 'void',
+        ]);
+        $this->assertInstanceOf('Cache\Adapter\Doctrine\DoctrineCachePool', $pool);
+        $this->assertInstanceOf('Psr\Cache\CacheItemPoolInterface', $pool);
+        $this->assertInstanceOf('Doctrine\Common\Cache\VoidCache', $pool->getCache());
+    }
 }

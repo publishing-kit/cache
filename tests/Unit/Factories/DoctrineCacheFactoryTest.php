@@ -42,4 +42,15 @@ final class DoctrineCacheFactoryTest extends SimpleTestCase
         ];
         $pool = $factory->make($config);
     }
+
+    public function testArray()
+    {
+        $factory = new DoctrineCacheFactory();
+        $pool = $factory->make([
+            'driver' => 'array',
+        ]);
+        $this->assertInstanceOf('Cache\Adapter\Doctrine\DoctrineCachePool', $pool);
+        $this->assertInstanceOf('Psr\Cache\CacheItemPoolInterface', $pool);
+        $this->assertInstanceOf('Doctrine\Common\Cache\ArrayCache', $pool->getCache());
+    }
 }

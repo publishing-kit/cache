@@ -84,7 +84,7 @@ final class StashCacheFactory implements CacheFactory
     {
         return new BlackHole();
     }
-    
+
     private function createEphemeralAdapter(): Ephemeral
     {
         return new Ephemeral();
